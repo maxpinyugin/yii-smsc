@@ -1,4 +1,4 @@
-yii-sms
+yii-smsc
 =======
 
 Yii-расширение для работы с api сервиса [smsc.ru](http://smsc.ru)
