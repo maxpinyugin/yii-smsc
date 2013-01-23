@@ -5,7 +5,7 @@ Yii-расширение для работы с api сервиса [smsc.ru](htt
 
 ## Установка
 
-Загрузите yii-sms из этого репозитория github:
+Загрузите yii-smsc из этого репозитория github:
 
     cd protected/extensions
     git clone git://github.com/pimax/yii-smsc.git
@@ -14,7 +14,7 @@ Yii-расширение для работы с api сервиса [smsc.ru](htt
 
     'components' => array
     (
-        'smsc' => array
+        'sms' => array
         (
             'class'    => 'application.extensions.yii-sms.SmsC',
             'login'     => 'username',      // Логин на сайте smsc.ru
