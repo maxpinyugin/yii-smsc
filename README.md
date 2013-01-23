@@ -41,10 +41,6 @@ Yii-расширение для работы с api сервиса [smsc.ru](htt
 
     Yii::app()->sms->balance();
 
-Дневной лимит:
-
-    Yii::app()->sms->limit();
-
 Отправители:
 
     Yii::app()->sms->senders();
