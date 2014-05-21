@@ -13,6 +13,8 @@ class SmsC extends CApplicationComponent
     
     public $login;
     
+    public $charset = 'utf-8';
+    
     public $password;
     
     public function init()
@@ -110,7 +112,8 @@ class SmsC extends CApplicationComponent
     {
         return array(
             'login' => $this->login,
-            'psw' => $this->password
+            'psw' => $this->password,
+            'charset'=>$this->charset
         );
     }
     
