@@ -97,6 +97,35 @@ class SmsC extends CApplicationComponent
         return $result;
     }
     
+    public function addSender($sender, $cmt = ''){
+		$url = self::HOST . self::SENDERS;
+        $params = $this->get_default_params();
+        $params['add'] = 1;
+        $params['sender'] = $sender;
+        $params['cmt'] = $cmt;
+        $result = $this->request( $url, $params );
+        $result = explode("\n", rtrim($result));
+	}
+	
+	public function addDigitSender($sender){
+		$url = self::HOST . self::SENDERS;
+        $params = $this->get_default_params();
+        $params['send_code'] = 1;
+        $params['sender'] = $sender;
+        $result = $this->request( $url, $params );
+        $result = explode("\n", rtrim($result));
+	}
+	
+	public function confirmDigitSender($sender, $code){
+		$url = self::HOST . self::SENDERS;
+        $params = $this->get_default_params();
+        $params['check_code'] = 1;
+        $params['code'] = $code;
+        $params['sender'] = $sender;
+        $result = $this->request( $url, $params );
+        $result = explode("\n", rtrim($result));
+	}
+    
     public function senders() 
     {
         $url = self::HOST . self::SENDERS;
