@@ -130,7 +130,7 @@ class SmsC extends CApplicationComponent
     {
         $url = self::HOST . self::SENDERS;
         $params = $this->get_default_params();
-        $params['get_senders'] = 1;
+        $params['get'] = 1;
         $result = $this->request( $url, $params );
         $result = explode("\n", rtrim($result));
 
