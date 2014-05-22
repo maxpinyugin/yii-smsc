@@ -26,7 +26,7 @@ class SmsC extends CApplicationComponent
 
         parent::init();
     }
-    
+
     public function send($to, $text, $from = null, $time = null)
     {
         $url = self::HOST . self::SEND;
@@ -42,19 +42,16 @@ class SmsC extends CApplicationComponent
         if ($time && $time < (time() + 7 * 60 * 60 * 24))
             $params['time'] = date("d.m.Y H:i", $time);
 
-        $params['fmt'] = 1;
+        $params['fmt'] = 3;
         $params['cost'] = 3;
 
         $result = $this->request($url, $params);
-        $result = explode(",", $result);
+        $result = json_decode($result);
 
-        return array(
-            'id' => $result[0],
-            'balance' => $result[3]
-        );
+        return $result;
     }
     
-    public function cost($to, $text)
+    public function cost($to, $text, $from = null)
     {
         $url = self::HOST . self::COST;
         $this->id = null;
@@ -62,7 +59,10 @@ class SmsC extends CApplicationComponent
         $params = $this->get_default_params();
         $params['phones'] = $to;
         $params['mes'] = $text;
-
+        
+        if (isset($from)){
+            $params['sender'] = $from;
+        }
 
         $params['fmt'] = 1;
         $params['cost'] = 1;
