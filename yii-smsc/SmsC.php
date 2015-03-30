@@ -72,7 +72,7 @@ class SmsC extends CApplicationComponent
 
         return array(
             'price' => $result[0],
-            'number' => $to
+            'number' => $result[1]
         );
     }
     
