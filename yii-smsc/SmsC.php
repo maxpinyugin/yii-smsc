@@ -68,12 +68,19 @@ class SmsC extends CApplicationComponent
         $params['cost'] = 1;
 
         $result = $this->request($url, $params);
-        $result = explode(",", $result);
 
-        return array(
-            'price' => $result[0],
-            'number' => $result[1]
-        );
+	if ($result) {
+            $result = explode(",", $result);
+            return array(
+                'price' => $result[0],
+                'number' => $result[1]
+            );
+        } else {
+            return array(
+                'price' => 0,
+                'number' => 0
+            );
+        }
     }
     
     public function status($id)
