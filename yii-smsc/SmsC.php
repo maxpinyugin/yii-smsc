@@ -50,8 +50,30 @@ class SmsC extends CApplicationComponent
 
         return $result;
     }
-    
-    public function cost($to, $text, $from = null)
+   
+
+    public function send_voice($to, $text, $voice = 'm', $from = null, $time = null)
+    {
+        $url = self::HOST . self::SEND;
+        $this->id = null;
+
+        $params = $this->get_default_params();
+        $params['phones'] = $to;
+        $params['mes'] = $text;
+
+        $params['fmt'] = 3;
+        $params['cost'] = 3;
+
+        $params['call'] = 1;
+        $params['voice'] = $voice;
+
+        $result = $this->request($url, $params);
+        $result = json_decode($result);
+
+        return $result;
+    }
+ 
+    public function cost($to, $text, $from = null, $call = null)
     {
         $url = self::HOST . self::COST;
         $this->id = null;
@@ -66,6 +88,9 @@ class SmsC extends CApplicationComponent
 
         $params['fmt'] = 1;
         $params['cost'] = 1;
+
+        if (isset($call))
+            $params['call'] = $call;
 
         $result = $this->request($url, $params);
 
@@ -163,6 +188,9 @@ class SmsC extends CApplicationComponent
         );
         curl_setopt_array($ch, $options);
         $result = curl_exec($ch);
+        if (!$result) {
+            $result = '0, '.curl_error($ch);
+        }
         curl_close($ch);
 
         return $result;
