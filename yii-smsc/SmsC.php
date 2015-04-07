@@ -46,7 +46,12 @@ class SmsC extends CApplicationComponent
         $params['cost'] = 3;
 
         $result = $this->request($url, $params);
-        $result = json_decode($result);
+	$res = explode(",", $result);
+        if (isset($res['0']) && ($res['0'] == 0)) {
+            $result = json_decode('{"error": '.$res[1].',"error_code": 0}');
+        } else {
+            $result = json_decode($result);
+        }
 
         return $result;
     }
@@ -68,7 +73,12 @@ class SmsC extends CApplicationComponent
         $params['voice'] = $voice;
 
         $result = $this->request($url, $params);
-        $result = json_decode($result);
+        $res = explode(",", $result);
+        if (isset($res['0']) && ($res['0'] == 0)) {
+            $result = json_decode('{"error": '.$res[1].',"error_code": 0}');
+        } else {
+            $result = json_decode($result);
+        }
 
         return $result;
     }
